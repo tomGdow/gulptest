@@ -9,6 +9,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
+var ghPages = require('gulp-gh-pages');
 
 
 gulp.task('hello', function() {
@@ -57,6 +58,11 @@ gulp.task('clean:dist', function() {
   return del.sync('dist');
 });
 
+gulp.task('deploy', function() {
+  return gulp.src('.dist/**/*')
+  .pipe(ghpages());
+});
+
 gulp.task('watch', function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/*.html', browserSync.reload);
@@ -69,6 +75,7 @@ gulp.task('build', function(callback) {
   callback
   )
 });
+
 gulp.task('default', function(callback) {
 runSequence(['sass', 'browserSync', 'watch'],
 callback)
