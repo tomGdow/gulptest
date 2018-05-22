@@ -60,7 +60,7 @@ gulp.task('clean:dist', function() {
 
 gulp.task('deploy', function() {
   return gulp.src('.dist/**/*')
-  .pipe(ghpages());
+  .pipe(ghPages());
 });
 
 gulp.task('watch', function() {
